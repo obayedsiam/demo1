@@ -1,14 +1,18 @@
 package com.example.demo.entity;
 
 import com.sun.istack.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
 @Entity
+@RequiredArgsConstructor
 @Table(name = "COURSE")
-public class Course {
+public class Course extends BaseEntity {
     @Id
-    @Autowired
+
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COURSE_ID")
@@ -19,26 +23,4 @@ public class Course {
 
     @Column(name = "COURSE_DURATION")
     private String duration;
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-
 }
