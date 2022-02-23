@@ -15,6 +15,10 @@ public interface StudentService {
 
     Optional<Student> findById(Long id, RecordStatus recordStatus);
 
+    Optional<Student> findById(Long id);
+
+    Student saveEncloser(Student student);
+
     Optional<Student> findByName(String name);
 
     Student insertCourse(StudentDto dto, RecordStatus recordStatus);

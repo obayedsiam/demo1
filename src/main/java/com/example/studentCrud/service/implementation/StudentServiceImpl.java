@@ -11,9 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +43,12 @@ public class StudentServiceImpl implements StudentService {
         return Optional.empty();
     }
 
+
+    @Override
+    public Optional<Student> findById(Long id) {
+        return repository.findById(id);
+    }
+
     @Override
     public Optional<Student> findByName(String name) {
         return repository.findByName(name);
@@ -57,5 +65,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student update(StudentDto dto, RecordStatus recordStatus) {
         return null;
+    }
+
+    @Transactional
+    public Student saveEncloser(Student student) {
+        Student student2 = repository.save(student);
+        return student2;
     }
 }

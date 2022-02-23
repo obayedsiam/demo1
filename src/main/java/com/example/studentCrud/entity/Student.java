@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,9 +24,20 @@ public class Student extends BaseEntity
     @OneToMany
     @JoinColumn(name = "STUDENT_ID")
     private List<Course> courseList;
+//
+//    @OneToOne
+//    @JoinColumn(name = "STUDENT_ID")
+//    private Enclosure enclosure;
 
-    @OneToOne
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "STUDENT_ID")
-    private Enclosure enclosure;
+    List<Enclosure> enclosure;
 
+
+    public void addEnclosures(List<Enclosure> encloser) {
+        if (this.enclosure == null) {
+            this.enclosure = new ArrayList<>();
+        }
+        this.enclosure.addAll(encloser);
+    }
 }
