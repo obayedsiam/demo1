@@ -1,5 +1,6 @@
 package com.example.studentCrud.entity;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
@@ -9,9 +10,10 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "STUDENT")
-public class Student
+public class Student extends BaseEntity
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "STUDENT_ID")
     private Long id;
 
