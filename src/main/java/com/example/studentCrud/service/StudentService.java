@@ -1,7 +1,9 @@
 package com.example.studentCrud.service;
 
+import com.example.studentCrud.dto.StudentCourseListDTO;
 import com.example.studentCrud.dto.StudentDto;
 import com.example.studentCrud.entity.Student;
+import com.example.studentCrud.entity.StudentCourse;
 import com.example.studentCrud.enums.RecordStatus;
 
 import java.util.List;
@@ -24,4 +26,6 @@ public interface StudentService {
     Student insertCourse(StudentDto dto, RecordStatus recordStatus);
 
     Student update(StudentDto dto, RecordStatus recordStatus);
+
+    Student studentCourse(StudentCourseListDTO dto, Student student);
 }

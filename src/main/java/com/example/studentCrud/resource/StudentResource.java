@@ -1,5 +1,6 @@
 package com.example.studentCrud.resource;
 
+import com.example.studentCrud.dto.StudentCourseListDTO;
 import com.example.studentCrud.dto.StudentDto;
 import com.example.studentCrud.entity.Enclosure;
 import com.example.studentCrud.entity.Student;
@@ -116,5 +117,16 @@ public class StudentResource {
         Student student = service.update(dto, RecordStatus.DRAFT);
 
         return ok(success(StudentDto.response(student), "Student Edited Successfully").getJson());
+    }
+
+    @PostMapping("/save-student-course/{studentId}")
+    @ApiOperation(value = "Update student", response = String.class)
+    public ResponseEntity<JSONObject> update(@PathVariable("studentId") @NotNull Long studentId, @RequestBody StudentCourseListDTO dto) {
+
+        Student student = service.findById(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Student " + studentId));
+        service.studentCourse(dto, student);
+
+        return ok(success(null, "Student Edited Successfully").getJson());
     }
 }

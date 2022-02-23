@@ -1,8 +1,10 @@
 package com.example.studentCrud.service.implementation;
 
+import com.example.studentCrud.dto.StudentCourseListDTO;
 import com.example.studentCrud.dto.StudentDto;
 import com.example.studentCrud.entity.Course;
 import com.example.studentCrud.entity.Student;
+import com.example.studentCrud.entity.StudentCourse;
 import com.example.studentCrud.enums.RecordStatus;
 import com.example.studentCrud.helper.StudentHelper;
 import com.example.studentCrud.repository.StudentRepository;
@@ -72,4 +74,12 @@ public class StudentServiceImpl implements StudentService {
         Student student2 = repository.save(student);
         return student2;
     }
+
+    @Override
+    public Student studentCourse(StudentCourseListDTO dto, Student student){
+        helper.setStudentCourse(dto, student);
+        repository.save(student);
+        return student;
+    }
+
 }
