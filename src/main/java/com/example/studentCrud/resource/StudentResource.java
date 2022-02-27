@@ -63,6 +63,7 @@ public class StudentResource {
             return badRequest().body(error(fieldError(bindingResult)).getJson());
         }
         Student student = service.insertCourse(dto, RecordStatus.DRAFT);
+
         return ok(success(StudentDto.response(student), "Student Save Successfully").getJson());
     }
 
@@ -82,14 +83,15 @@ public class StudentResource {
             return badRequest().body(
                     error("file 1 data must be selected").getJson());
 
-        List<Enclosure> enclosures = null;
+
+        Enclosure enclosure = null;
         try {
-            enclosures = studentHelper.getStudentEnclosers(file1, request1, student);
+            enclosure = studentHelper.getStudentEnclosure(file1, request1, student);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        student.addEnclosures(enclosures);
+        student.addEnclosure(enclosure);
 
         service.saveEncloser(student);
         return ok(success(null, "success").getJson());
@@ -119,14 +121,14 @@ public class StudentResource {
         return ok(success(StudentDto.response(student), "Student Edited Successfully").getJson());
     }
 
-    @PostMapping("/save-student-course/{studentId}")
-    @ApiOperation(value = "Update student", response = String.class)
-    public ResponseEntity<JSONObject> update(@PathVariable("studentId") @NotNull Long studentId, @RequestBody StudentCourseListDTO dto) {
-
-        Student student = service.findById(studentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Student " + studentId));
-        service.studentCourse(dto, student);
-
-        return ok(success(null, "Student Edited Successfully").getJson());
-    }
+//    @PostMapping("/save-student-course/{studentId}")
+//    @ApiOperation(value = "Update student", response = String.class)
+//    public ResponseEntity<JSONObject> update(@PathVariable("studentId") @NotNull Long studentId, @RequestBody StudentCourseListDTO dto) {
+//
+//        Student student = service.findById(studentId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Student " + studentId));
+//        service.studentCourse(dto, student);
+//
+//        return ok(success(null, "Student Edited Successfully").getJson());
+//    }
 }

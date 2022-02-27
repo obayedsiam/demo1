@@ -27,5 +27,5 @@ public interface StudentService {
 
     Student update(StudentDto dto, RecordStatus recordStatus);
 
-    Student studentCourse(StudentCourseListDTO dto, Student student);
+  //  Student studentCourse(StudentCourseListDTO dto, Student student);
 }

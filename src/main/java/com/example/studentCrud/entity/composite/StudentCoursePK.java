@@ -24,7 +24,7 @@ public class StudentCoursePK implements Serializable {
     @JoinColumn(name = "STUDENT_ID")
     private Student student;
 
-    @Column(name = "COURSE_ID", nullable = false)
+    @Column(name = "COURSE_ID")
     private Long courseId;
 
     public StudentCoursePK(Student student, Long courseId) {

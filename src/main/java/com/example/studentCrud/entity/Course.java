@@ -1,5 +1,6 @@
 package com.example.studentCrud.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -23,4 +24,9 @@ public class Course extends BaseEntity {
 
     @Column(name = "COURSE_DURATION")
     private String duration;
+
+//    @JsonBackReference
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "STUDENT_ID")
+//    private Student student;
 }
