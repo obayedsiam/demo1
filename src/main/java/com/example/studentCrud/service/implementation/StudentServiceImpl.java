@@ -7,6 +7,7 @@ import com.example.studentCrud.entity.Course;
 import com.example.studentCrud.entity.Student;
 import com.example.studentCrud.entity.StudentCourse;
 import com.example.studentCrud.enums.RecordStatus;
+import com.example.studentCrud.exception.ResourceNotFoundException;
 import com.example.studentCrud.helper.StudentHelper;
 import com.example.studentCrud.repository.CourseRepository;
 import com.example.studentCrud.repository.StudentRepository;
@@ -28,11 +29,7 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository repository;
 
-    private final CourseRepository courseRepo;
-
     private final StudentHelper helper;
-
-    private final EntityManager em;
 
 
     @Override
@@ -42,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
@@ -62,24 +59,25 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student insertCourse(StudentDto dto, RecordStatus recordStatus) {
+    public Student insertStudent(StudentDto dto, RecordStatus recordStatus) {
         Student student = dto.to();
         helper.getSaveData(student, recordStatus);
-//        List<Course> list  = dto.getCourseList();
-//
-//        for(int i=0; i<list.size();i++){
-//            Course course = list.get(i);
-//            courseRepo.save(course);
-//        }
+
         Student saveStudent = repository.save(student);
         return saveStudent;
     }
 
     @Override
+    @Transactional
     public Student update(StudentDto dto, RecordStatus recordStatus) {
-        return null;
+        Student student = repository.findById(dto.getId()).orElseThrow(() -> new ResourceNotFoundException("Student Id: " + dto.getId()));
+        dto.update(student);
+        helper.getUpdateData(student,recordStatus);
+        Student updatedStudent =  repository.save(student);
+        return updatedStudent;
     }
 
+    @Override
     @Transactional
     public Student saveEncloser(Student student) {
         Student student2 = repository.save(student);

@@ -1,128 +1,128 @@
-# Server Configuration
-server:
-
-  port: 9090
-  error:
-    include-stacktrace: always
-  compression:
-    enabled: true
-  address: 0.0.0.0
-
-
-# Spring Configuration
-spring:
-  application:
-    name: eiin-service
-
-  # Database Configuration
-  datasource:
-    url: jdbc:mysql://localhost:3306/demoDb?createDatabaseIfNotExist=true
-    username: root
-    password:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-    # Hikari Configuration
-    hikari:
-      minimum-idle: 1
-      maximum-pool-size: 15
-      idle-timeout: 30000
-      pool-name: SpringBootJPAHikariCP
-      max-lifetime: 2000000
-      connection-timeout: 30000
-
-  # JPA Configuration
-  jpa:
-    # Properties
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-        naming:
-          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-        show_sql: true
-        format_sql: true
-        use_sql: true
-        shutdown_on_session_factory_close: false
-        connection:
-          characterEncoding: utf-8
-          CharSet: utf-8
-          useUnicode: true
-          legacy_limit_handler: true
-
-    # Hibernate
-    hibernate:
-      ddl-auto: none
-      naming:
-        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-
-  # Servlet Configuration
-  servlet:
-    multipart:
-      enabled: true
-      location: /tmp
-      max-file-size: 50MB
-      max-request-size: 50MB
-      resolve-lazily: false
-
-  # Redis Configuration
-  redis:
-    host: 192.168.1.17
-    port: 6379
-
-
-  # Security Configuration
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: http://192.168.1.17:8002/auth/realms/banbeis/protocol/openid-connect/certs
-
-
-
-  # Kafka Configuration
-  kafka:
-    producer:
-      bootstrap-servers: 192.168.1.17:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
-# Service discovery configuration
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://192.168.1.17:8761/eureka/
-    healthcheck:
-      enabled: true
-  instance:
-    metadata-map:
-      instance-id: ${server.address}:${random.value}
-
-# Management Configuration
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-
-profilePhotoUploadPath: /home/alhaj/Documents/upload
-instituteEncloserUploadPath: /home/alhaj/Documents/upload
-
-#ftpFileUploadPath: /var/www/html/IEIMS/eiin-service
-ftpFileUploadPath : G:\\Upload
-
-jwt:
-  token:
-    secret: banbeis
-    time: 700000
-redis:
-  host: 192.168.1.17
-  port: 6379
-
-keycloak:
-  auth-server-url: http://192.168.1.17:8002/auth
-  realm: banbeis
-  public-client: true
-  principal-attribute: preferred_username
-  resource: eiin-service
+## Server Configuration
+#server:
+#
+#  port: 9090
+#  error:
+#    include-stacktrace: always
+#  compression:
+#    enabled: true
+#  address: 0.0.0.0
+#
+#
+## Spring Configuration
+#spring:
+#  application:
+#    name: eiin-service
+#
+#  # Database Configuration
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/demoDb?createDatabaseIfNotExist=true
+#    username: root
+#    password:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#
+#    # Hikari Configuration
+#    hikari:
+#      minimum-idle: 1
+#      maximum-pool-size: 15
+#      idle-timeout: 30000
+#      pool-name: SpringBootJPAHikariCP
+#      max-lifetime: 2000000
+#      connection-timeout: 30000
+#
+#  # JPA Configuration
+#  jpa:
+#    # Properties
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5Dialect
+#        naming:
+#          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+#          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#        show_sql: true
+#        format_sql: true
+#        use_sql: true
+#        shutdown_on_session_factory_close: false
+#        connection:
+#          characterEncoding: utf-8
+#          CharSet: utf-8
+#          useUnicode: true
+#          legacy_limit_handler: true
+#
+#    # Hibernate
+#    hibernate:
+#      ddl-auto: none
+#      naming:
+#        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#
+#  # Servlet Configuration
+#  servlet:
+#    multipart:
+#      enabled: true
+#      location: /tmp
+#      max-file-size: 50MB
+#      max-request-size: 50MB
+#      resolve-lazily: false
+#
+#  # Redis Configuration
+#  redis:
+#    host: 192.168.1.17
+#    port: 6379
+#
+#
+#  # Security Configuration
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          jwk-set-uri: http://192.168.1.17:8002/auth/realms/banbeis/protocol/openid-connect/certs
+#
+#
+#
+#  # Kafka Configuration
+#  kafka:
+#    producer:
+#      bootstrap-servers: 192.168.1.17:9092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#
+## Service discovery configuration
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://192.168.1.17:8761/eureka/
+#    healthcheck:
+#      enabled: true
+#  instance:
+#    metadata-map:
+#      instance-id: ${server.address}:${random.value}
+#
+## Management Configuration
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#
+#
+#profilePhotoUploadPath: /home/alhaj/Documents/upload
+#instituteEncloserUploadPath: /home/alhaj/Documents/upload
+#
+##ftpFileUploadPath: /var/www/html/IEIMS/eiin-service
+#ftpFileUploadPath : G:\\Upload
+#
+#jwt:
+#  token:
+#    secret: banbeis
+#    time: 700000
+#redis:
+#  host: 192.168.1.17
+#  port: 6379
+#
+#keycloak:
+#  auth-server-url: http://192.168.1.17:8002/auth
+#  realm: banbeis
+#  public-client: true
+#  principal-attribute: preferred_username
+#  resource: eiin-service

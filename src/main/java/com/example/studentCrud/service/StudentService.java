@@ -23,7 +23,7 @@ public interface StudentService {
 
     Optional<Student> findByName(String name);
 
-    Student insertCourse(StudentDto dto, RecordStatus recordStatus);
+    Student insertStudent(StudentDto dto, RecordStatus recordStatus);
 
     Student update(StudentDto dto, RecordStatus recordStatus);
 

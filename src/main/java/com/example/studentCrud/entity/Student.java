@@ -26,7 +26,7 @@ public class Student extends BaseEntity
     private List<Course> courseList;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "STUDENT_ID")
+    @JoinColumn(name = "ENCLOSURE_ID")
     private Enclosure enclosure;
 
     public void addEnclosure(Enclosure enclosure) {

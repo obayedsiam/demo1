@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.example.studentCrud.exception.ApiError.fieldError;
@@ -56,6 +57,16 @@ public class CourseResource {
     public ResponseEntity<JSONObject> findById(@PathVariable Long id) {
 
         Optional<Course> course = service.findById(id, RecordStatus.DRAFT);
+
+        return ok(success(course).getJson());
+    }
+
+    @GetMapping("/findAll")
+    @ResponseBody
+    //@ApiOperation(value = "Get student by id", response = StudentResponse.class)
+    public ResponseEntity<JSONObject> findAll() {
+
+        List<Course> course = service.findAll();
 
         return ok(success(course).getJson());
     }

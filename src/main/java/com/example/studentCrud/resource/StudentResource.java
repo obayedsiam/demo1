@@ -2,6 +2,7 @@ package com.example.studentCrud.resource;
 
 import com.example.studentCrud.dto.StudentCourseListDTO;
 import com.example.studentCrud.dto.StudentDto;
+import com.example.studentCrud.entity.Course;
 import com.example.studentCrud.entity.Enclosure;
 import com.example.studentCrud.entity.Student;
 import com.example.studentCrud.enums.RecordStatus;
@@ -62,10 +63,31 @@ public class StudentResource {
             // error handling code goes here.
             return badRequest().body(error(fieldError(bindingResult)).getJson());
         }
-        Student student = service.insertCourse(dto, RecordStatus.DRAFT);
+        Student student = service.insertStudent(dto, RecordStatus.DRAFT);
 
         return ok(success(StudentDto.response(student), "Student Save Successfully").getJson());
     }
+
+
+    @RequestMapping(
+            path = "/save/course",
+            method = RequestMethod.POST)
+    @ApiOperation(value = "save student info with Image image", response = String.class)
+    public ResponseEntity<JSONObject> save(@RequestBody StudentCourseListDTO dto, BindingResult bindingResult) {
+
+        //  log.info("Got request for creating a student.");
+        // ValidationUtils.invokeValidator(validator, dto, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            // error handling code goes here.
+            return badRequest().body(error(fieldError(bindingResult)).getJson());
+        }
+      //  StudentCourseListDTO student = service.insertStudent(dto, RecordStatus.DRAFT);
+        Student student1 = new Student();
+
+        return ok(success(StudentDto.response(student1), "Student Save Successfully").getJson());
+    }
+
 
     @RequestMapping(
             path = "/save/encloser/{studentId}",
@@ -92,7 +114,6 @@ public class StudentResource {
         }
 
         student.addEnclosure(enclosure);
-
         service.saveEncloser(student);
         return ok(success(null, "success").getJson());
     }
@@ -103,6 +124,16 @@ public class StudentResource {
     public ResponseEntity<JSONObject> findById(@PathVariable Long id) {
 
         Optional<Student> student = service.findById(id);
+
+        return ok(success(student).getJson());
+    }
+
+    @GetMapping("/findAll")
+    @ResponseBody
+    //@ApiOperation(value = "Get student by id", response = StudentResponse.class)
+    public ResponseEntity<JSONObject> findAll() {
+
+        List<Student> student = service.findAll();
 
         return ok(success(student).getJson());
     }

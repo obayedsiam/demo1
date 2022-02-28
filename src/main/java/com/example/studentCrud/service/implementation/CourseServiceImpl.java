@@ -30,10 +30,6 @@ private final EntityManager em;
         return null;
     }
 
-    @Override
-    public List<Course> findAll() {
-        return null;
-    }
 
     @Override
     public Optional<Course> findById(Long id, RecordStatus recordStatus) {
@@ -44,6 +40,11 @@ private final EntityManager em;
     @Override
     public Optional<Course> findByName(String name) {
         return repository.findByName(name);
+    }
+
+    @Override
+    public List<Course> findAll() {
+        return repository.findAll();
     }
 
     @Override

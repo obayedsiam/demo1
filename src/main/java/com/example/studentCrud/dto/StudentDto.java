@@ -17,15 +17,13 @@ public class StudentDto {
 
     private String name;
 
-    private List<Course> courseList;
 
-    private Enclosure enclosure;
 
     public static StudentDto response(Student student) {
         StudentDto dto = new StudentDto();
         dto.setId(student.getId());
         dto.setName(student.getName());
-        dto.setCourseList(student.getCourseList());
+   //    dto.setCourseList(student.getCourseList());
   //      dto.setEnclosure(student.getEnclosure());
         return dto;
     }
@@ -33,7 +31,7 @@ public class StudentDto {
     public Student to() {
         Student student = new Student();
         student.setName(this.name);
-        student.setCourseList(this.courseList);
+  //      student.setCourseList(this.courseList);
 //        List<Course> temp = new ArrayList<>();
 //
 //        for(int i=0; i<=this.courseList.size();i++){
@@ -44,6 +42,11 @@ public class StudentDto {
 //        }
 //        student.setCourseList(temp);
 ////      student.setEnclosure(this.enclosure);
+        return student;
+    }
+
+    public Student update(Student student){
+        student.setName(this.name);
         return student;
     }
 
