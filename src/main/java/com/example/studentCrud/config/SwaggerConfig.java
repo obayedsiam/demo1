@@ -58,7 +58,6 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-
                 "Demo Application Student-Course",
                 "API for web and mobile client",
                 "1.0",

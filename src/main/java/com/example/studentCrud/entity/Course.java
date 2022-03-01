@@ -12,8 +12,8 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Table(name = "COURSE")
 public class Course extends BaseEntity {
-    @Id
 
+    @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COURSE_ID")

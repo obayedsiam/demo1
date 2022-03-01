@@ -39,10 +39,10 @@ public class CourseDto {
         return course;
     }
 
-    public Course update (Course course){
-       course.setName(this.name);
-       course.setDuration(this.duration);
-       return course;
+    public Course update(Course course) {
+        course.setName(this.name);
+        course.setDuration(this.duration);
+        return course;
     }
 
 }

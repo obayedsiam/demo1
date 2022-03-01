@@ -14,6 +14,13 @@ public class StudentCourseDTO {
     private String duration;
     private long version;
 
+    public static StudentCourseDTO fromEntity(StudentCourse studentCourse) {
+        StudentCourseDTO studentCourseDTO = new StudentCourseDTO();
+        studentCourseDTO.setCourseId(studentCourse.getPk().getCourseId());
+        // studentCourseDTO.setVersion(studentCourse.getVersion());
+        return studentCourseDTO;
+    }
+
     public StudentCourse toEntity(Student student) {
         StudentCourse studentCourse = new StudentCourse();
         studentCourse.setDuration(duration);
@@ -21,12 +28,5 @@ public class StudentCourseDTO {
         studentCourse.setPk(new StudentCoursePK(student, courseId));
 //        student.getStudentCourses().add(studentCourse);
         return studentCourse;
-    }
-
-    public static StudentCourseDTO fromEntity(StudentCourse studentCourse) {
-        StudentCourseDTO studentCourseDTO = new StudentCourseDTO();
-        studentCourseDTO.setCourseId(studentCourse.getPk().getCourseId());
-       // studentCourseDTO.setVersion(studentCourse.getVersion());
-        return studentCourseDTO;
     }
 }

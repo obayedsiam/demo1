@@ -1,18 +1,18 @@
 package com.example.studentCrud.service.implementation;
 
-import com.example.studentCrud.dto.CourseDto;
-import com.example.studentCrud.dto.StudentCourseListDTO;
 import com.example.studentCrud.dto.StudentDto;
-import com.example.studentCrud.entity.Course;
 import com.example.studentCrud.entity.Student;
-import com.example.studentCrud.entity.StudentCourse;
 import com.example.studentCrud.enums.RecordStatus;
 import com.example.studentCrud.exception.ResourceNotFoundException;
+import com.example.studentCrud.helper.GetListHelper;
 import com.example.studentCrud.helper.StudentHelper;
-import com.example.studentCrud.repository.CourseRepository;
 import com.example.studentCrud.repository.StudentRepository;
 import com.example.studentCrud.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,10 +30,14 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentHelper helper;
 
+    private final EntityManager em;
+
 
     @Override
-    public Map<String, Object> getList(String name, Integer page, Integer size) {
-        return null;
+    public Map<String, Object> getList(Integer page, Integer size) {
+
+        return new GetListHelper<Student>(em, Student.class).getList(page, size);
+
     }
 
     @Override
@@ -72,8 +75,8 @@ public class StudentServiceImpl implements StudentService {
     public Student update(StudentDto dto, RecordStatus recordStatus) {
         Student student = repository.findById(dto.getId()).orElseThrow(() -> new ResourceNotFoundException("Student Id: " + dto.getId()));
         dto.update(student);
-        helper.getUpdateData(student,recordStatus);
-        Student updatedStudent =  repository.save(student);
+        helper.getUpdateData(student, recordStatus);
+        Student updatedStudent = repository.save(student);
         return updatedStudent;
     }
 
@@ -83,6 +86,7 @@ public class StudentServiceImpl implements StudentService {
         Student student2 = repository.save(student);
         return student2;
     }
+
 
 //    @Override
 //    public Student studentCourse(StudentCourseListDTO dto, Student student){
