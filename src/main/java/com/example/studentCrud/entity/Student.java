@@ -27,6 +27,10 @@ public class Student extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "STUDENT_ID")
+    private List<Address> addressList;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "STUDENT_ID")
     private List<StudentCourse> studentCourses;
 
 

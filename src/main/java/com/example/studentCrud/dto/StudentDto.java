@@ -1,8 +1,11 @@
 package com.example.studentCrud.dto;
 
+import com.example.studentCrud.entity.Address;
 import com.example.studentCrud.entity.Student;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -12,12 +15,14 @@ public class StudentDto {
 
     private String name;
 
+    private List<Address> addressList;
+
 
     public static StudentDto response(Student student) {
         StudentDto dto = new StudentDto();
         dto.setId(student.getId());
         dto.setName(student.getName());
-        //    dto.setCourseList(student.getCourseList());
+        dto.setAddressList(student.getAddressList());
         //      dto.setEnclosure(student.getEnclosure());
         return dto;
     }
@@ -25,7 +30,7 @@ public class StudentDto {
     public Student to() {
         Student student = new Student();
         student.setName(this.name);
-        //      student.setCourseList(this.courseList);
+        student.setAddressList(this.addressList);
 //        List<Course> temp = new ArrayList<>();
 //
 //        for(int i=0; i<=this.courseList.size();i++){
